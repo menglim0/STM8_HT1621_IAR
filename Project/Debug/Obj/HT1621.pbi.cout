@@ -1,4 +1,4 @@
-"D:\SmartGit_Repository\STM8_HT1621_IAR_Git\USER\adc1.c"
+"D:\SmartGit_Repository\STM8_HT1621_IAR_Git\USER\HT1621.c"
 -std=c99
 -ferror-limit=100
 -I
@@ -226,7 +226,7 @@ D:\SmartGit_Repository\STM8_HT1621_IAR_Git\USER
 -D__HAS_LOCATED_WITH_INIT__=1
 -D__IAR_COMPILERBASE__=593160
 -D__DATE__="Jan 16 2019"
--D__TIME__="22:24:00"
+-D__TIME__="22:27:15"
 -D__STDC__=1
 -D__STDC_VERSION__=199901L
 -D__STDC_HOSTED__=1

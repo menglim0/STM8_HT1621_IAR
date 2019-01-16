@@ -1,22 +1,22 @@
-"D:\SmartGit_Repository\STM8_HT1621_IAR\FWlib\src\stm8s_clk.c"
+"D:\SmartGit_Repository\STM8_HT1621_IAR_Git\FWlib\src\stm8s_clk.c"
 -std=c99
 -ferror-limit=100
 -I
-D:\SmartGit_Repository\STM8_HT1621_IAR\Project\..\FWlib\inc
+D:\SmartGit_Repository\STM8_HT1621_IAR_Git\Project\..\FWlib\inc
 -I
-D:\SmartGit_Repository\STM8_HT1621_IAR\Project\..\FWlib\src
+D:\SmartGit_Repository\STM8_HT1621_IAR_Git\Project\..\FWlib\src
 -I
-D:\SmartGit_Repository\STM8_HT1621_IAR\Project\..\USER
+D:\SmartGit_Repository\STM8_HT1621_IAR_Git\Project\..\USER
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 6.5\stm8\inc
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 6.5\stm8\inc\c
 -I
-D:\SmartGit_Repository\STM8_HT1621_IAR\FWlib\inc
+D:\SmartGit_Repository\STM8_HT1621_IAR_Git\FWlib\inc
 -I
-D:\SmartGit_Repository\STM8_HT1621_IAR\FWlib\src
+D:\SmartGit_Repository\STM8_HT1621_IAR_Git\FWlib\src
 -I
-D:\SmartGit_Repository\STM8_HT1621_IAR\USER
+D:\SmartGit_Repository\STM8_HT1621_IAR_Git\USER
 -D__CHAR_BITS__=8
 -D__CHAR_MAX__=0xff
 -D__CHAR_MIN__=0
@@ -226,7 +226,7 @@ D:\SmartGit_Repository\STM8_HT1621_IAR\USER
 -D__HAS_LOCATED_WITH_INIT__=1
 -D__IAR_COMPILERBASE__=593160
 -D__DATE__="Jan 16 2019"
--D__TIME__="21:46:14"
+-D__TIME__="22:24:00"
 -D__STDC__=1
 -D__STDC_VERSION__=199901L
 -D__STDC_HOSTED__=1

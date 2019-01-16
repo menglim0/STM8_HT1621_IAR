@@ -17,7 +17,7 @@
         <debug>1</debug>
         <option>
           <name>GenDeviceSelectMenu</name>
-          <state>STM8S105C6	STM8S105C6</state>
+          <state>STM8S003F3	STM8S003F3</state>
         </option>
         <option>
           <name>GenCodeModel</name>
@@ -70,7 +70,7 @@
         </option>
         <option>
           <name>GenLibInFormatterDescription</name>
-          <state>No specifier n, no float, no scan set, no assignment suppressing.</state>
+          <state>Full formatting, without multibytes.</state>
         </option>
         <option>
           <name>GenLibOutFormatter</name>
@@ -79,7 +79,7 @@
         </option>
         <option>
           <name>GenLibOutFormatterDescription</name>
-          <state>No specifier a or A, no specifier n, no float.</state>
+          <state>Full formatting, without multibytes.</state>
         </option>
         <option>
           <name>GenStackSize</name>
@@ -1579,6 +1579,9 @@
       <name>$PROJ_DIR$\..\FWlib\src\stm8s_clk.c</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\FWlib\src\stm8s_gpio.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\FWlib\src\stm8s_uart2.c</name>
     </file>
   </group>
@@ -1586,6 +1589,9 @@
     <name>USER</name>
     <file>
       <name>$PROJ_DIR$\..\USER\adc1.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\USER\HT1621.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\USER\main.c</name>

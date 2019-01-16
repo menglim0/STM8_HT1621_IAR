@@ -1,4 +1,4 @@
-"D:\SmartGit_Repository\STM8_HT1621_IAR_Git\USER\adc1.c"
+"D:\SmartGit_Repository\STM8_HT1621_IAR_Git\FWlib\src\stm8s_gpio.c"
 -std=c99
 -ferror-limit=100
 -I

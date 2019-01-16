@@ -13,6 +13,7 @@
 #include "sysclock.h"
 #include "adc1.h"
 #include "uart.h"
+#include "HT1621.h"
 
 /* Private defines -----------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
@@ -35,6 +36,7 @@ int main(void)
   SystemClock_Init();
   ADC_Init();
   Uart2_Init();
+  HT1621B_Init();
   while (1)
   {
     /*·ÅÖÃÄãµÄ´úÂë*/
