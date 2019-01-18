@@ -3,12 +3,19 @@
  * Copyright (c) 2002-2005 STMicroelectronics
  */
 #include "stm8s.h"
+#include "stm8s_gpio.h"
+
+//#include "STM8S103F.h"
+
+
 #include "HT1621.h"
 
 #define SYS_DIS    	0x00  //¹Ø±ÕÏµÍ³Õñµ´Æ÷ºÍLCDÆ«Ñ¹·¢ÉúÆ÷
 #define SYS_EN   		0x02  //´ò¿ªÏµÍ³Õñµ´Æ÷
+#define LCD_ON   		0x03  //LCD ON
 #define LED_OFF  		0x04  //¹Ø±ÕLCDÆ«Ñ¹
 #define LED_ON   		0x06  //´ò¿ªLCDÆ«Ñ¹
+
 //#define TIME_DIS 		0x08  //Ê±»ùÊä³öÊ§Ð§
 #define WDT_DIS  		0x0A  //WDTÒç³ö±êÖ¾Ê§Ð§
 //#define TIMER_EN 		0x0C  //Ê±»ùÊä³öÊ¹ÄÜ
@@ -27,13 +34,45 @@
 //_Bool CS @PD_ODR:6;   //Æ¬Ñ¡
 //_Bool WR @PD_ODR:5;   //Ð´Ê¹ÄÜ
 //_Bool DAT @PD_ODR:4; //Êý¾Ý¿Ú
+
+
+/***
+**CS  PD6
+**WR  PD5
+**DAT  PD4
+**/
+
+#define CS_Port GPIOD
+#define CS_Pin GPIO_PIN_6
+
+#define WR_Port GPIOD
+#define WR_Pin GPIO_PIN_5
+
+#define DAT_Port GPIOD
+#define DAT_Pin GPIO_PIN_4
+
+
+#define CS_High() GPIO_WriteHigh(CS_Port, CS_Pin)
+#define CS_Low() GPIO_WriteLow(CS_Port, CS_Pin)
+
+#define WR_High() GPIO_WriteHigh(WR_Port, WR_Pin)
+#define WR_Low() GPIO_WriteLow(WR_Port, WR_Pin)
+
+#define DAT_High() GPIO_WriteHigh(DAT_Port, DAT_Pin)
+#define DAT_Low() GPIO_WriteLow(DAT_Port, DAT_Pin)
+
 //
 //_Bool TEST_PORT @PA_ODR:3; //ÓÃÓÚ²âÊÔ
 
-_Bool CS; //Æ¬Ñ¡
-_Bool WR;  //Ð´Ê¹ÄÜ
-_Bool DAT;  //Êý¾Ý¿Ú
 
+void Port_Init(void)
+{       
+        //¶¨ÒåLEDµÄ¹Ü½ÅÎªÊä³öÄ£Ê½
+	GPIO_Init(CS_Port, CS_Pin, GPIO_MODE_OUT_PP_HIGH_FAST );
+    GPIO_Init(WR_Port, WR_Pin, GPIO_MODE_OUT_PP_HIGH_FAST );
+    GPIO_Init(DAT_Port, DAT_Pin, GPIO_MODE_OUT_PP_HIGH_FAST );	
+        //GPIO_Init(LED_PORT, LED_4, GPIO_MODE_OUT_PP_HIGH_FAST );	
+}
 
 
 void delayNMS(unsigned int n)
@@ -50,17 +89,40 @@ void delayNMS(unsigned int n)
 	}
 }
 
+
+void delayNop(unsigned int n)
+{
+	//unsigned int i;
+	unsigned int j;
+	
+	
+	 for(j=0;j<=n;j++) 	
+         {
+           asm("nop");
+         }
+
+}
+
+
+
 void HT1621B_SendBit(unsigned char data,unsigned char cnt) //Ò»Î»Êý¾Ý¸ßÎ»ÔÚÇ°
 {
 	unsigned char i;
   for(i=0;i<cnt;i++)
   {
-	  if((data&0x80) == 0) DAT = 0;
-		else DAT = 1;
-		WR = 0;
-		
-		WR = 1;    //²úÉúÒ»¸öÉÏÉýÑØ
+	  if((data&0x80) == 0) 
+	  	{
+	  	DAT_Low();
+	  	}	  
+		else
+		{
+		DAT_High();
+		}
+		WR_Low();
+		delayNop(1);
+		WR_High();   //²úÉúÒ»¸öÉÏÉýÑØ
 		data<<=1;   //Êý¾ÝÎ»×óÒÆ
+        delayNop(1);
 	}
 }
 
@@ -69,32 +131,33 @@ void HT1621B_SendDataBit(unsigned char data,unsigned char bit) //Ò»Î»Êý¾ÝµÍÎ»ÔÚÇ
 	unsigned char i;
   for(i=0;i<bit;i++)
   {
-	  if((data&0x01) == 0) DAT = 0;
-		else DAT = 1;
-		WR = 0;
-		
-		WR = 1;    //²úÉúÒ»¸öÉÏÉýÑØ
+	  if((data&0x01) == 0) DAT_Low();
+		else DAT_High();
+		WR_Low();
+		delayNop(1);
+		WR_High();   //²úÉúÒ»¸öÉÏÉýÑØ
 		data>>=1;   //Êý¾ÝÎ»×óÒÆ
+        delayNop(1);
 	}  
 }
 
 void HT1621B_SendCmd(unsigned char command)
 {
-  CS = 0;
+  CS_Low();
 	HT1621B_SendBit(0x80,4); //CMDÄ£Ê½
 	HT1621B_SendBit(command,8);
-	CS = 1;
+	CS_High();
 }
 
 
 void HT1621B_WriteData(unsigned char addr,unsigned char data) //Á¬ÐøÐ´
 {
-	CS = 0; //Ð´Ä£Ê½CSÐèÖÃÎªµÍµçÆ½
+	CS_Low(); //Ð´Ä£Ê½CSÐèÖÃÎªµÍµçÆ½
   	HT1621B_SendBit(0xa0,3); //WRITEÄ£Ê½
 	addr<<=2;
 	HT1621B_SendBit(addr,6); //Ð´6Î»µØÖ·,¶ÎÑ¡
 	HT1621B_SendDataBit(data,4); //Ð´4Î»Êý¾Ý,Î»Ñ¡
-	CS = 1; 
+	CS_High(); 
 }
 
                          // seg           1              2              4                 8
@@ -115,9 +178,9 @@ void DisplayNum(unsigned char *SegX,unsigned char a,unsigned char b,unsigned cha
 void HT1621B_Init(void)
 {
 	unsigned char i;
-	CS = 1;
-	WR = 1;
-	DAT = 1;
+	CS_High();
+	WR_High();;
+	DAT_High();
 	delayNMS(100);
   	HT1621B_SendCmd(BIAS_COM);
 	HT1621B_SendCmd(RC_256K);
@@ -126,7 +189,7 @@ void HT1621B_Init(void)
 	HT1621B_SendCmd(SYS_EN);
 	HT1621B_SendCmd(LED_ON);
 	for(i=0;i<=8;i++)
-        HT1621B_WriteData(i,0x00);
+    HT1621B_WriteData(i,0x00);
 }
 
 

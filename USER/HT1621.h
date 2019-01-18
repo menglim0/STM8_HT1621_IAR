@@ -9,6 +9,9 @@ void HT1621B_WriteData(unsigned char addr,unsigned char data);
 void DisplayNum(unsigned char *SegX,unsigned char a,unsigned char b,unsigned char c,unsigned char d);
 void HT1621B_Init(void);
 void delayNMS(unsigned int n);
+void delayNop(unsigned int n);
+
+void Port_Init(void);
 
 
 

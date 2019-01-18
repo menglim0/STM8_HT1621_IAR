@@ -12,13 +12,21 @@
 #include "stm8s.h"
 #include "sysclock.h"
 #include "adc1.h"
-#include "uart.h"
+//#include "uart.h"
 #include "HT1621.h"
+#include "FuelLevel.h"
+#include "interpol.h"
+#include "typedef.h"
+
 
 /* Private defines -----------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
-    u16 u16_adc1_value;  
+u16 u16_adc1_value; 
+u16 u16_adc1_value_old,DisplayFuelLevel; 
+uint8_t ADC_Update_index;
+
+
 
 void Delay(unsigned int time)
 {
@@ -34,18 +42,29 @@ int main(void)
 
   /* 系统时钟初始化 */
   SystemClock_Init();
+  Port_Init();
   ADC_Init();
-  Uart2_Init();
+  //Uart2_Init();
   HT1621B_Init();
   while (1)
   {
     /*放置你的代码*/
-    Delay(3000);
-      u16_adc1_value=u16_adc1_value;
-    u16_adc1_value = ADC1_GetConversionValue();
-   // UART2_printf("adc=%d\n",u16_adc1_value);
-    printf_str("\nadc=");
-    putascShort(u16_adc1_value);
+       
+  
+        Delay(1000);
+	u16_adc1_value_old=u16_adc1_value;
+        u16_adc1_value = ADC1_GetConversionValue();
+        
+        ADC_Update_index++;
+        
+        if(ADC_Update_index>=32)
+        {
+          ADC_Update_index=0;
+        }
+    
+        DisplayFuelLevel = FuelLevel_Percent_Calc(u16_adc1_value,ADC_Update_index);
+         HT1621B_WriteData(0xaa,0x07);
+
 
   }
   
