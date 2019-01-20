@@ -43,13 +43,13 @@
 **/
 
 #define CS_Port GPIOD
-#define CS_Pin GPIO_PIN_5
+#define CS_Pin GPIO_PIN_6
 
 #define WR_Port GPIOD
-#define WR_Pin GPIO_PIN_6
+#define WR_Pin GPIO_PIN_5
 
-#define DAT_Port GPIOA
-#define DAT_Pin GPIO_PIN_1
+#define DAT_Port GPIOD
+#define DAT_Pin GPIO_PIN_4
 
 
 #define CS_High() GPIO_WriteHigh(CS_Port, CS_Pin)
@@ -60,18 +60,6 @@
 
 #define DAT_High() GPIO_WriteHigh(DAT_Port, DAT_Pin)
 #define DAT_Low() GPIO_WriteLow(DAT_Port, DAT_Pin)
-
-/*Display code*/
-
-
-//主显示区显示0至f的数字码
-unsigned char HUM8_data[16]={0x7d,0x60,0x3e,0x7a,0x63,0x5b,0x5f,0x70,0x7f,0x7b,0x77,0x4f,0x0e,0x6e,0x1f,0x17};//不带小数点
-
-//unsigned char Percent_data_Addr[21]={9,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,8};
-//unsigned char Percent_data_Data[21]={4,8,4,2,1,1,2,4,8,8,4,2,1,1,2,4,8,8,4,2,1};
-
-
-
 
 //
 //_Bool TEST_PORT @PA_ODR:3; //用于测试
@@ -200,7 +188,6 @@ void HT1621B_Init(void)
 	HT1621B_SendCmd(WDT_DIS);
 	HT1621B_SendCmd(SYS_EN);
 	HT1621B_SendCmd(LED_ON);
-	HT1621B_SendCmd(LCD_ON);
 	for(i=0;i<=8;i++)
     HT1621B_WriteData(i,0x00);
 }

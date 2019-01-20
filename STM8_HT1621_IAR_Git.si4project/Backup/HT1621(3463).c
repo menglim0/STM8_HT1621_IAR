@@ -200,7 +200,6 @@ void HT1621B_Init(void)
 	HT1621B_SendCmd(WDT_DIS);
 	HT1621B_SendCmd(SYS_EN);
 	HT1621B_SendCmd(LED_ON);
-	HT1621B_SendCmd(LCD_ON);
 	for(i=0;i<=8;i++)
     HT1621B_WriteData(i,0x00);
 }

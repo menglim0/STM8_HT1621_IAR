@@ -1,6 +1,6 @@
 ###############################################################################
 #                                                                             #
-# IAR ELF Linker V1.42.1.142 for STM8                   18/Jan/2019  22:15:09 #
+# IAR ELF Linker V1.42.1.142 for STM8                   20/Jan/2019  20:52:46 #
 # Copyright 2010-2013 IAR Systems AB.                                         #
 #                                                                             #
 #    Output file  =  D:\SmartGit_Repository\STM8_HT1621_IAR_Git\Project\Debug #
@@ -29,7 +29,7 @@
 #                    \Exe\STM8S_Demo.out --map D:\SmartGit_Repository\STM8_HT #
 #                    1621_IAR_Git\Project\Debug\List\STM8S_Demo.map --config  #
 #                    "C:\Program Files (x86)\IAR Systems\Embedded Workbench   #
-#                    6.5\stm8\config\lnkstm8s103f2.icf" --config_def          #
+#                    6.5\stm8\config\lnkstm8s003f3.icf" --config_def          #
 #                    _CSTACK_SIZE=0x100 --config_def _HEAP_SIZE=0x100         #
 #                    --entry __iar_program_start --debug_lib                  #
 #                                                                             #
@@ -62,17 +62,17 @@ __rt_version               = 4
           rw section .huge_func.textrw, rw section .iar.dynexit,
           rw section .near.bss, rw section .near.data, rw section .near.noinit,
           rw section .near_func.textrw };
-"A3":  place at start of [0x008000-0x008fff] { block INTVEC };
-"P3":  place in [from 0x008000 to 0x008fff] {
+"A3":  place at start of [0x008000-0x009fff] { block INTVEC };
+"P3":  place in [from 0x008000 to 0x009fff] {
           ro section .far.data_init, ro section .far_func.textrw_init,
           ro section .huge.data_init, ro section .huge_func.textrw_init,
           ro section .iar.init_table, ro section .init_array,
           ro section .near.data_init, ro section .near.rodata,
           ro section .near_func.text, ro section .near_func.textrw_init,
           ro section .tiny.data_init, ro section .tiny.rodata_init };
-"P4":  place in [from 0x008000 to 0x008fff] {
+"P4":  place in [from 0x008000 to 0x009fff] {
           ro section .far.rodata, ro section .far_func.text };
-"P5":  place in [from 0x008000 to 0x008fff] {
+"P5":  place in [from 0x008000 to 0x009fff] {
           ro section .huge.rodata, ro section .huge_func.text };
 
   Section            Kind      Address   Size  Object
@@ -81,41 +81,56 @@ __rt_version               = 4
   .vregs             uninit   0x000000   0x10  vregs.o [4]
                             - 0x000010   0x10
 
-"P2", part 1 of 2:                       0x1c
-  P2 s0                       0x000010   0x1c  <Init block>
-    .near.data       inited   0x000010    0xe  interpol.o [1]
-    .near.data       inited   0x00001e    0xe  interpol.o [1]
-                            - 0x00002c   0x1c
+"P2", part 1 of 2:                       0x5a
+  P2 s0                       0x000010   0x5a  <Init block>
+    .near.data       inited   0x000010   0x15  main.o [1]
+    .near.data       inited   0x000025   0x15  main.o [1]
+    .near.data       inited   0x00003a    0xe  interpol.o [1]
+    .near.data       inited   0x000048    0xe  interpol.o [1]
+    .near.data       inited   0x000056    0xa  main.o [1]
+    .near.data       inited   0x000060    0xa  main.o [1]
+                            - 0x00006a   0x5a
 
-"P2", part 2 of 2:                       0x6e
-  .near.bss          zero     0x00002c   0x40  FuelLevel.o [1]
-  .near.bss          zero     0x00006c    0x2  FuelLevel.o [1]
-  .near.bss          zero     0x00006e    0x2  FuelLevel.o [1]
-  .near.bss          zero     0x000070    0x2  FuelLevel.o [1]
-  .near.bss          zero     0x000072    0x2  FuelLevel.o [1]
-  .near.bss          zero     0x000074    0x2  FuelLevel.o [1]
-  .near.bss          zero     0x000076    0x2  interpol.o [1]
-  .near.bss          zero     0x000078    0x2  interpol.o [1]
-  .near.bss          zero     0x00007a    0x2  interpol.o [1]
-  .near.bss          zero     0x00007c    0x2  interpol.o [1]
-  .near.bss          zero     0x00007e    0x2  interpol.o [1]
-  .near.bss          zero     0x000080    0x2  interpol.o [1]
-  .near.bss          zero     0x000082    0x2  interpol.o [1]
-  .near.bss          zero     0x000084    0x2  interpol.o [1]
-  .near.bss          zero     0x000086    0x2  interpol.o [1]
-  .near.bss          zero     0x000088    0x2  interpol.o [1]
-  .near.bss          zero     0x00008a    0x2  interpol.o [1]
-  .near.bss          zero     0x00008c    0x2  interpol.o [1]
-  .near.bss          zero     0x00008e    0x2  main.o [1]
-  .near.bss          zero     0x000090    0x2  main.o [1]
-  .near.bss          zero     0x000092    0x2  main.o [1]
-  .near.bss          zero     0x000094    0x1  FuelLevel.o [1]
-  .near.bss          zero     0x000095    0x1  FuelLevel.o [1]
-  .near.bss          zero     0x000096    0x1  FuelLevel.o [1]
-  .near.bss          zero     0x000097    0x1  interpol.o [1]
-  .near.bss          zero     0x000098    0x1  interpol.o [1]
-  .near.bss          zero     0x000099    0x1  main.o [1]
-                            - 0x00009a   0x6e
+"P2", part 2 of 2:                       0x7f
+  .near.bss          zero     0x00006a   0x40  FuelLevel.o [1]
+  .near.bss          zero     0x0000aa    0x2  FuelLevel.o [1]
+  .near.bss          zero     0x0000ac    0x2  FuelLevel.o [1]
+  .near.bss          zero     0x0000ae    0x2  FuelLevel.o [1]
+  .near.bss          zero     0x0000b0    0x2  FuelLevel.o [1]
+  .near.bss          zero     0x0000b2    0x2  FuelLevel.o [1]
+  .near.bss          zero     0x0000b4    0x2  interpol.o [1]
+  .near.bss          zero     0x0000b6    0x2  interpol.o [1]
+  .near.bss          zero     0x0000b8    0x2  interpol.o [1]
+  .near.bss          zero     0x0000ba    0x2  interpol.o [1]
+  .near.bss          zero     0x0000bc    0x2  interpol.o [1]
+  .near.bss          zero     0x0000be    0x2  interpol.o [1]
+  .near.bss          zero     0x0000c0    0x2  interpol.o [1]
+  .near.bss          zero     0x0000c2    0x2  interpol.o [1]
+  .near.bss          zero     0x0000c4    0x2  interpol.o [1]
+  .near.bss          zero     0x0000c6    0x2  interpol.o [1]
+  .near.bss          zero     0x0000c8    0x2  interpol.o [1]
+  .near.bss          zero     0x0000ca    0x2  interpol.o [1]
+  .near.bss          zero     0x0000cc    0x2  main.o [1]
+  .near.bss          zero     0x0000ce    0x2  main.o [1]
+  .near.bss          zero     0x0000d0    0x2  main.o [1]
+  .near.bss          zero     0x0000d2    0x2  main.o [1]
+  .near.bss          zero     0x0000d4    0x2  main.o [1]
+  .near.bss          zero     0x0000d6    0x2  main.o [1]
+  .near.bss          zero     0x0000d8    0x2  main.o [1]
+  .near.bss          zero     0x0000da    0x2  main.o [1]
+  .near.bss          zero     0x0000dc    0x2  main.o [1]
+  .near.bss          zero     0x0000de    0x1  FuelLevel.o [1]
+  .near.bss          zero     0x0000df    0x1  FuelLevel.o [1]
+  .near.bss          zero     0x0000e0    0x1  FuelLevel.o [1]
+  .near.bss          zero     0x0000e1    0x1  interpol.o [1]
+  .near.bss          zero     0x0000e2    0x1  interpol.o [1]
+  .near.bss          zero     0x0000e3    0x1  main.o [1]
+  .near.bss          zero     0x0000e4    0x1  main.o [1]
+  .near.bss          zero     0x0000e5    0x1  main.o [1]
+  .near.bss          zero     0x0000e6    0x1  main.o [1]
+  .near.bss          zero     0x0000e7    0x1  main.o [1]
+  .near.bss          zero     0x0000e8    0x1  main.o [1]
+                            - 0x0000e9   0x7f
 
 "A2":                                   0x100
   CSTACK                      0x000300  0x100  <Block>
@@ -127,81 +142,86 @@ __rt_version               = 4
     .intvec          const    0x008000   0x80  interrupt.o [4]
                             - 0x008080   0x80
 
-"P3":                                    0x31
+"P3":                                    0x6f
   .iar.init_table    const    0x008080   0x15  - Linker created -
-  Initializer bytes  ro data  0x008095   0x1c  <for P2 s0>
-                            - 0x0080b1   0x31
+  Initializer bytes  ro data  0x008095   0x5a  <for P2 s0>
+                            - 0x0080ef   0x6f
 
 "P4":                                   0x2a2
-  .far_func.text     ro code  0x0080b1   0xa8  vreg_util.o [4]
-  .far_func.text     ro code  0x008159   0x4c  short.o [4]
-  .far.rodata        const    0x0081a5   0x42  stm8s_adc1.o [1]
-  .far.rodata        const    0x0081e7   0x42  stm8s_gpio.o [1]
-  .far_func.text     ro code  0x008229   0x42  init.o [4]
-  .far.rodata        const    0x00826b   0x41  stm8s_clk.o [1]
-  .far_func.text     ro code  0x0082ac   0x2a  init.o [4]
-  .far_func.text     ro code  0x0082d6   0x1e  init.o [4]
-  .far_func.text     ro code  0x0082f4   0x1a  __dbg_xxexit.o [3]
-  .far_func.text     ro code  0x00830e   0x17  cstartup.o [4]
-  .far_func.text     ro code  0x008325    0xe  far_util.o [4]
-  .far_func.text     ro code  0x008333    0xb  init.o [4]
-  .far_func.text     ro code  0x00833e    0x6  cexit.o [4]
-  .far_func.text     ro code  0x008344    0x4  interrupt.o [4]
-  .far_func.text     ro code  0x008348    0x4  exit.o [4]
-  .far_func.text     ro code  0x00834c    0x3  low_level_init.o [4]
-  .far_func.text     ro code  0x00834f    0x3  unhandled_exception.o [4]
-  .far_func.text     ro code  0x008352    0x1  __dbg_break.o [3]
-                            - 0x008353  0x2a2
+  .far_func.text     ro code  0x0080ef   0xa8  vreg_util.o [4]
+  .far_func.text     ro code  0x008197   0x4c  short.o [4]
+  .far.rodata        const    0x0081e3   0x42  stm8s_adc1.o [1]
+  .far.rodata        const    0x008225   0x42  stm8s_gpio.o [1]
+  .far_func.text     ro code  0x008267   0x42  init.o [4]
+  .far.rodata        const    0x0082a9   0x41  stm8s_clk.o [1]
+  .far_func.text     ro code  0x0082ea   0x2a  init.o [4]
+  .far_func.text     ro code  0x008314   0x1e  init.o [4]
+  .far_func.text     ro code  0x008332   0x1a  __dbg_xxexit.o [3]
+  .far_func.text     ro code  0x00834c   0x17  cstartup.o [4]
+  .far_func.text     ro code  0x008363    0xe  far_util.o [4]
+  .far_func.text     ro code  0x008371    0xb  init.o [4]
+  .far_func.text     ro code  0x00837c    0x6  cexit.o [4]
+  .far_func.text     ro code  0x008382    0x4  interrupt.o [4]
+  .far_func.text     ro code  0x008386    0x4  exit.o [4]
+  .far_func.text     ro code  0x00838a    0x3  low_level_init.o [4]
+  .far_func.text     ro code  0x00838d    0x3  unhandled_exception.o [4]
+  .far_func.text     ro code  0x008390    0x1  __dbg_break.o [3]
+                            - 0x008391  0x2a2
 
-"P5":                                   0x927
-  .huge_func.text    ro code  0x008353  0x133  stm8s_adc1.o [1]
-  .huge_func.text    ro code  0x008486   0xe7  stm8s_gpio.o [1]
-  .huge_func.text    ro code  0x00856d   0xbb  stm8s_adc1.o [1]
-  .huge_func.text    ro code  0x008628   0xa9  stm8s_adc1.o [1]
-  .huge_func.text    ro code  0x0086d1   0xa6  interpol.o [1]
-  .huge_func.text    ro code  0x008777   0x68  FuelLevel.o [1]
-  .huge_func.text    ro code  0x0087df   0x55  stm8s_adc1.o [1]
-  .huge_func.text    ro code  0x008834   0x54  HT1621.o [1]
-  .huge_func.text    ro code  0x008888   0x49  main.o [1]
-  .huge_func.text    ro code  0x0088d1   0x45  interpol.o [1]
-  .huge_func.text    ro code  0x008916   0x45  stm8s_adc1.o [1]
-  .huge_func.text    ro code  0x00895b   0x42  stm8s_adc1.o [1]
-  .huge_func.text    ro code  0x00899d   0x3a  HT1621.o [1]
-  .huge_func.text    ro code  0x0089d7   0x3a  HT1621.o [1]
-  .huge_func.text    ro code  0x008a11   0x37  stm8s_adc1.o [1]
-  .huge_func.text    ro code  0x008a48   0x35  HT1621.o [1]
-  .huge_func.text    ro code  0x008a7d   0x2e  adc1.o [1]
-  .huge_func.text    ro code  0x008aab   0x2c  stm8s_clk.o [1]
-  .huge_func.text    ro code  0x008ad7   0x25  HT1621.o [1]
-  .huge_func.text    ro code  0x008afc   0x25  main.o [1]
-  .huge_func.text    ro code  0x008b21   0x21  stm8s_adc1.o [1]
-  .huge_func.text    ro code  0x008b42   0x1a  HT1621.o [1]
-  .huge_func.text    ro code  0x008b5c   0x19  HT1621.o [1]
-  .huge_func.text    ro code  0x008b75   0x15  stm8s_adc1.o [1]
-  .huge_func.text    ro code  0x008b8a   0x15  stm8s_clk.o [1]
-  .huge_func.text    ro code  0x008b9f   0x15  stm8s_gpio.o [1]
-  .huge_func.text    ro code  0x008bb4   0x14  HT1621.o [1]
-  .huge_func.text    ro code  0x008bc8    0xe  HT1621.o [1]
-  .huge_func.text    ro code  0x008bd6    0xd  HT1621.o [1]
-  .huge_func.text    ro code  0x008be3    0xd  HT1621.o [1]
-  .huge_func.text    ro code  0x008bf0    0xd  stm8s_gpio.o [1]
-  .huge_func.text    ro code  0x008bfd    0xb  HT1621.o [1]
-  .huge_func.text    ro code  0x008c08    0xb  stm8s_adc1.o [1]
-  .huge_func.text    ro code  0x008c13    0xb  stm8s_clk.o [1]
-  .huge_func.text    ro code  0x008c1e    0xb  stm8s_gpio.o [1]
-  .huge_func.text    ro code  0x008c29    0xa  HT1621.o [1]
-  .huge_func.text    ro code  0x008c33    0xa  HT1621.o [1]
-  .huge_func.text    ro code  0x008c3d    0xa  stm8s_adc1.o [1]
-  .huge_func.text    ro code  0x008c47    0x9  stm8s_adc1.o [1]
-  .huge_func.text    ro code  0x008c50    0x8  stm8s_gpio.o [1]
-  .huge_func.text    ro code  0x008c58    0x7  HT1621.o [1]
-  .huge_func.text    ro code  0x008c5f    0x5  HT1621.o [1]
-  .huge_func.text    ro code  0x008c64    0x5  stm8s_adc1.o [1]
-  .huge_func.text    ro code  0x008c69    0x5  stm8s_adc1.o [1]
-  .huge_func.text    ro code  0x008c6e    0x5  stm8s_adc1.o [1]
-  .huge_func.text    ro code  0x008c73    0x5  sysclock.o [1]
-  .huge_func.text    ro code  0x008c78    0x2  main.o [1]
-                            - 0x008c7a  0x927
+"P5":                                   0xa82
+  .huge_func.text    ro code  0x008391  0x152  main.o [1]
+  .huge_func.text    ro code  0x0084e3  0x133  stm8s_adc1.o [1]
+  .huge_func.text    ro code  0x008616   0xe7  stm8s_gpio.o [1]
+  .huge_func.text    ro code  0x0086fd   0xbb  stm8s_adc1.o [1]
+  .huge_func.text    ro code  0x0087b8   0xb6  interpol.o [1]
+  .huge_func.text    ro code  0x00886e   0xa9  stm8s_adc1.o [1]
+  .huge_func.text    ro code  0x008917   0x68  FuelLevel.o [1]
+  .huge_func.text    ro code  0x00897f   0x58  HT1621.o [1]
+  .huge_func.text    ro code  0x0089d7   0x55  stm8s_adc1.o [1]
+  .huge_func.text    ro code  0x008a2c   0x45  interpol.o [1]
+  .huge_func.text    ro code  0x008a71   0x45  stm8s_adc1.o [1]
+  .huge_func.text    ro code  0x008ab6   0x42  stm8s_adc1.o [1]
+  .huge_func.text    ro code  0x008af8   0x37  stm8s_adc1.o [1]
+  .huge_func.text    ro code  0x008b2f   0x36  HT1621.o [1]
+  .huge_func.text    ro code  0x008b65   0x36  HT1621.o [1]
+  .huge_func.text    ro code  0x008b9b   0x35  HT1621.o [1]
+  .huge_func.text    ro code  0x008bd0   0x2e  adc1.o [1]
+  .huge_func.text    ro code  0x008bfe   0x2c  stm8s_clk.o [1]
+  .huge_func.text    ro code  0x008c2a   0x25  HT1621.o [1]
+  .huge_func.text    ro code  0x008c4f   0x25  main.o [1]
+  .huge_func.text    ro code  0x008c74   0x21  main.o [1]
+  .huge_func.text    ro code  0x008c95   0x21  stm8s_adc1.o [1]
+  .huge_func.text    ro code  0x008cb6   0x19  HT1621.o [1]
+  .huge_func.text    ro code  0x008ccf   0x18  HT1621.o [1]
+  .huge_func.text    ro code  0x008ce7   0x15  stm8s_adc1.o [1]
+  .huge_func.text    ro code  0x008cfc   0x15  stm8s_clk.o [1]
+  .huge_func.text    ro code  0x008d11   0x15  stm8s_gpio.o [1]
+  .huge_func.text    ro code  0x008d26   0x14  HT1621.o [1]
+  .huge_func.text    ro code  0x008d3a    0xe  HT1621.o [1]
+  .huge_func.text    ro code  0x008d48    0xd  HT1621.o [1]
+  .huge_func.text    ro code  0x008d55    0xd  HT1621.o [1]
+  .huge_func.text    ro code  0x008d62    0xd  HT1621.o [1]
+  .huge_func.text    ro code  0x008d6f    0xd  stm8s_gpio.o [1]
+  .huge_func.text    ro code  0x008d7c    0xb  HT1621.o [1]
+  .huge_func.text    ro code  0x008d87    0xb  stm8s_adc1.o [1]
+  .huge_func.text    ro code  0x008d92    0xb  stm8s_clk.o [1]
+  .huge_func.text    ro code  0x008d9d    0xb  stm8s_gpio.o [1]
+  .huge_func.text    ro code  0x008da8    0xa  HT1621.o [1]
+  .huge_func.text    ro code  0x008db2    0xa  HT1621.o [1]
+  .huge_func.text    ro code  0x008dbc    0xa  main.o [1]
+  .huge_func.text    ro code  0x008dc6    0xa  stm8s_adc1.o [1]
+  .huge_func.text    ro code  0x008dd0    0x9  stm8s_adc1.o [1]
+  .huge_func.text    ro code  0x008dd9    0x8  HT1621.o [1]
+  .huge_func.text    ro code  0x008de1    0x8  HT1621.o [1]
+  .huge_func.text    ro code  0x008de9    0x8  stm8s_gpio.o [1]
+  .huge_func.text    ro code  0x008df1    0x7  HT1621.o [1]
+  .huge_func.text    ro code  0x008df8    0x5  HT1621.o [1]
+  .huge_func.text    ro code  0x008dfd    0x5  stm8s_adc1.o [1]
+  .huge_func.text    ro code  0x008e02    0x5  stm8s_adc1.o [1]
+  .huge_func.text    ro code  0x008e07    0x5  stm8s_adc1.o [1]
+  .huge_func.text    ro code  0x008e0c    0x5  sysclock.o [1]
+  .huge_func.text    ro code  0x008e11    0x2  main.o [1]
+                            - 0x008e13  0xa82
 
 
 *******************************************************************************
@@ -211,14 +231,14 @@ __rt_version               = 4
           Address   Size
           -------   ----
 Zero (__iar_zero_init2)
-    1 destination range, total size 0x6e:
-          0x00002c  0x6e
+    1 destination range, total size 0x7f:
+          0x00006a  0x7f
 
 Copy (__iar_copy_init2)
-    1 source range, total size 0x1c:
-          0x008095  0x1c
-    1 destination range, total size 0x1c:
-          0x000010  0x1c
+    1 source range, total size 0x5a:
+          0x008095  0x5a
+    1 destination range, total size 0x5a:
+          0x000010  0x5a
 
 
 
@@ -230,16 +250,16 @@ Copy (__iar_copy_init2)
     ------                 -------  -------  -------
 D:\SmartGit_Repository\STM8_HT1621_IAR_Git\Project\Debug\Obj: [1]
     FuelLevel.o                104                77
-    HT1621.o                   444
+    HT1621.o                   467
     adc1.o                      46
-    interpol.o                 235       28       54
-    main.o                     112                 7
+    interpol.o                 251       28       54
+    main.o                     420       62       86
     stm8s_adc1.o             1 037       66
     stm8s_clk.o                 76       65
     stm8s_gpio.o               284       66
     sysclock.o                   5
     ------------------------------------------------
-    Total:                   2 343      225      138
+    Total:                   2 690      287      217
 
 command line: [2]
     ------------------------------------------------
@@ -268,7 +288,7 @@ dlstm8mln.a: [4]
 
     Linker created                       21      256
 ----------------------------------------------------
-    Grand Total:             2 820      374      410
+    Grand Total:             3 167      436      489
 
 
 *******************************************************************************
@@ -297,34 +317,34 @@ Entry                    Address   Size  Type      Object
 ?e1                     0x000005         Data  Gb  vregs.o [4]
 ?e2                     0x000009         Data  Gb  vregs.o [4]
 ?e3                     0x00000d         Data  Gb  vregs.o [4]
-?epilogue_l2            0x008131         Code  Gb  vreg_util.o [4]
-?epilogue_l2_l3         0x00812d         Code  Gb  vreg_util.o [4]
-?epilogue_w4            0x008136         Code  Gb  vreg_util.o [4]
+?epilogue_l2            0x00816f         Code  Gb  vreg_util.o [4]
+?epilogue_l2_l3         0x00816b         Code  Gb  vreg_util.o [4]
+?epilogue_w4            0x008174         Code  Gb  vreg_util.o [4]
 ?l0                     0x000000         Data  Gb  vregs.o [4]
 ?l1                     0x000004         Data  Gb  vregs.o [4]
 ?l2                     0x000008         Data  Gb  vregs.o [4]
 ?l3                     0x00000c         Data  Gb  vregs.o [4]
-?load24_e1_0x           0x008325         Code  Gb  far_util.o [4]
-?mov_e0_e2              0x00813b         Code  Gb  vreg_util.o [4]
-?mov_e1_e2              0x008145         Code  Gb  vreg_util.o [4]
-?mov_e2_e0              0x00814f         Code  Gb  vreg_util.o [4]
-?mov_w1_w5              0x00813e         Code  Gb  vreg_util.o [4]
-?mov_w3_w5              0x008148         Code  Gb  vreg_util.o [4]
-?mov_w5_w1              0x008152         Code  Gb  vreg_util.o [4]
-?mul16_x_x_w0           0x008159         Code  Gb  short.o [4]
-?pop_l2                 0x00810b         Code  Gb  vreg_util.o [4]
-?pop_l3                 0x008116         Code  Gb  vreg_util.o [4]
-?pop_w4                 0x0080cd         Code  Gb  vreg_util.o [4]
-?push_l2                0x0080e0         Code  Gb  vreg_util.o [4]
-?push_l3                0x0080e5         Code  Gb  vreg_util.o [4]
-?push_w4                0x0080b1         Code  Gb  vreg_util.o [4]
-?sdiv16_x_x_y           0x008177         Code  Gb  short.o [4]
-?sll16_x_x_4            0x00819a         Code  Gb  short.o [4]
-?sll16_x_x_5            0x008199         Code  Gb  short.o [4]
-?sll16_x_x_6            0x008198         Code  Gb  short.o [4]
-?sll16_x_x_a            0x008190         Code  Gb  short.o [4]
-?srl16_x_x_4            0x0081a0         Code  Gb  short.o [4]
-?srl16_x_x_5            0x00819f         Code  Gb  short.o [4]
+?load24_e1_0x           0x008363         Code  Gb  far_util.o [4]
+?mov_e0_e2              0x008179         Code  Gb  vreg_util.o [4]
+?mov_e1_e2              0x008183         Code  Gb  vreg_util.o [4]
+?mov_e2_e0              0x00818d         Code  Gb  vreg_util.o [4]
+?mov_w1_w5              0x00817c         Code  Gb  vreg_util.o [4]
+?mov_w3_w5              0x008186         Code  Gb  vreg_util.o [4]
+?mov_w5_w1              0x008190         Code  Gb  vreg_util.o [4]
+?mul16_x_x_w0           0x008197         Code  Gb  short.o [4]
+?pop_l2                 0x008149         Code  Gb  vreg_util.o [4]
+?pop_l3                 0x008154         Code  Gb  vreg_util.o [4]
+?pop_w4                 0x00810b         Code  Gb  vreg_util.o [4]
+?push_l2                0x00811e         Code  Gb  vreg_util.o [4]
+?push_l3                0x008123         Code  Gb  vreg_util.o [4]
+?push_w4                0x0080ef         Code  Gb  vreg_util.o [4]
+?sdiv16_x_x_y           0x0081b5         Code  Gb  short.o [4]
+?sll16_x_x_4            0x0081d8         Code  Gb  short.o [4]
+?sll16_x_x_5            0x0081d7         Code  Gb  short.o [4]
+?sll16_x_x_6            0x0081d6         Code  Gb  short.o [4]
+?sll16_x_x_a            0x0081ce         Code  Gb  short.o [4]
+?srl16_x_x_4            0x0081de         Code  Gb  short.o [4]
+?srl16_x_x_5            0x0081dd         Code  Gb  short.o [4]
 ?w0                     0x000000         Data  Gb  vregs.o [4]
 ?w1                     0x000002         Data  Gb  vregs.o [4]
 ?w2                     0x000004         Data  Gb  vregs.o [4]
@@ -333,90 +353,111 @@ Entry                    Address   Size  Type      Object
 ?w5                     0x00000a         Data  Gb  vregs.o [4]
 ?w6                     0x00000c         Data  Gb  vregs.o [4]
 ?w7                     0x00000e         Data  Gb  vregs.o [4]
-ADC1_Cmd                0x008b21   0x21  Code  Gb  stm8s_adc1.o [1]
-ADC1_ConversionConfig   0x008628   0xa9  Code  Gb  stm8s_adc1.o [1]
-ADC1_DeInit             0x008a11   0x37  Code  Gb  stm8s_adc1.o [1]
+ADC1_Cmd                0x008c95   0x21  Code  Gb  stm8s_adc1.o [1]
+ADC1_ConversionConfig   0x00886e   0xa9  Code  Gb  stm8s_adc1.o [1]
+ADC1_DeInit             0x008af8   0x37  Code  Gb  stm8s_adc1.o [1]
 ADC1_ExternalTriggerConfig
-                        0x0087df   0x55  Code  Gb  stm8s_adc1.o [1]
+                        0x0089d7   0x55  Code  Gb  stm8s_adc1.o [1]
 ADC1_GetConversionValue
-                        0x008916   0x45  Code  Gb  stm8s_adc1.o [1]
-ADC1_Init               0x008353  0x133  Code  Gb  stm8s_adc1.o [1]
-ADC1_PrescalerConfig    0x00895b   0x42  Code  Gb  stm8s_adc1.o [1]
+                        0x008a71   0x45  Code  Gb  stm8s_adc1.o [1]
+ADC1_Init               0x0084e3  0x133  Code  Gb  stm8s_adc1.o [1]
+ADC1_PrescalerConfig    0x008ab6   0x42  Code  Gb  stm8s_adc1.o [1]
 ADC1_SchmittTriggerConfig
-                        0x00856d   0xbb  Code  Gb  stm8s_adc1.o [1]
-ADC1_StartConversion    0x008c6e    0x5  Code  Gb  stm8s_adc1.o [1]
-ADC_ConvertValueFilter  0x00002c   0x40  Data  Gb  FuelLevel.o [1]
+                        0x0086fd   0xbb  Code  Gb  stm8s_adc1.o [1]
+ADC1_StartConversion    0x008e07    0x5  Code  Gb  stm8s_adc1.o [1]
+ADC_ConvertValueFilter  0x00006a   0x40  Data  Gb  FuelLevel.o [1]
 ADC_ConvertValueFilterFinal
-                        0x000070    0x2  Data  Gb  FuelLevel.o [1]
+                        0x0000ae    0x2  Data  Gb  FuelLevel.o [1]
 ADC_ConvertValueFilter_Old
-                        0x00006e    0x2  Data  Gb  FuelLevel.o [1]
-ADC_Init                0x008a7d   0x2e  Code  Gb  adc1.o [1]
-ADC_SimpleConvertValue  0x00006c    0x2  Data  Gb  FuelLevel.o [1]
-ADC_Total32_SUM         0x000074    0x2  Data  Gb  FuelLevel.o [1]
-ADC_Update_index        0x000099    0x1  Data  Gb  main.o [1]
-CLK_HSIPrescalerConfig  0x008aab   0x2c  Code  Gb  stm8s_clk.o [1]
+                        0x0000ac    0x2  Data  Gb  FuelLevel.o [1]
+ADC_Init                0x008bd0   0x2e  Code  Gb  adc1.o [1]
+ADC_SimpleConvertValue  0x0000aa    0x2  Data  Gb  FuelLevel.o [1]
+ADC_Total32_SUM         0x0000b2    0x2  Data  Gb  FuelLevel.o [1]
+ADC_Update_index        0x0000e3    0x1  Data  Gb  main.o [1]
+CLK_HSIPrescalerConfig  0x008bfe   0x2c  Code  Gb  stm8s_clk.o [1]
 CSTACK$$Base            0x000300          --   Gb  - Linker created -
 CSTACK$$Limit           0x000400          --   Gb  - Linker created -
-Current_Range           0x00007a    0x2  Data  Gb  interpol.o [1]
-Delay                   0x008afc   0x25  Code  Gb  main.o [1]
-DisplayFuelLevel        0x000092    0x2  Data  Gb  main.o [1]
+Current_Range           0x0000b8    0x2  Data  Gb  interpol.o [1]
+Delay                   0x008c4f   0x25  Code  Gb  main.o [1]
+DisplayFuelLevel        0x0000d2    0x2  Data  Gb  main.o [1]
+DisplayFuelLevel_Dec    0x0000da    0x2  Data  Gb  main.o [1]
+DisplayFuelLevel_Hund   0x0000d8    0x2  Data  Gb  main.o [1]
+DisplayFuelLevel_Percent
+                        0x0000d4    0x2  Data  Gb  main.o [1]
+DisplayFuelLevel_Percent_old
+                        0x0000d6    0x2  Data  Gb  main.o [1]
+DisplayFuelLevel_Unfilter
+                        0x0000d0    0x2  Data  Gb  main.o [1]
+DisplayFuelLevel_Unit   0x0000dc    0x2  Data  Gb  main.o [1]
 FuelLevel_ControlPoint_Filter_Raw
-                        0x000010    0xe  Data  Gb  interpol.o [1]
+                        0x00003a    0xe  Data  Gb  interpol.o [1]
 FuelLevel_ControlPoint_Percent
-                        0x00001e    0xe  Data  Gb  interpol.o [1]
-FuelLevel_Percent_Calc  0x008777   0x68  Code  Gb  FuelLevel.o [1]
-Fuel_Percent            0x000072    0x2  Data  Gb  FuelLevel.o [1]
-Fuel_Read_1ST           0x000094    0x1  Data  Gb  FuelLevel.o [1]
-Fuellevel_FaultState    0x000097    0x1  Data  Gb  interpol.o [1]
-GPIO_Init               0x008486   0xe7  Code  Gb  stm8s_gpio.o [1]
-GPIO_WriteHigh          0x008bf0    0xd  Code  Gb  stm8s_gpio.o [1]
-GPIO_WriteLow           0x008c50    0x8  Code  Gb  stm8s_gpio.o [1]
-HT1621B_Init            0x008834   0x54  Code  Gb  HT1621.o [1]
-HT1621B_SendBit         0x00899d   0x3a  Code  Gb  HT1621.o [1]
-HT1621B_SendCmd         0x008ad7   0x25  Code  Gb  HT1621.o [1]
-HT1621B_SendDataBit     0x0089d7   0x3a  Code  Gb  HT1621.o [1]
-HT1621B_WriteData       0x008a48   0x35  Code  Gb  HT1621.o [1]
+                        0x000048    0xe  Data  Gb  interpol.o [1]
+FuelLevel_Percent_Calc  0x008917   0x68  Code  Gb  FuelLevel.o [1]
+Fuel_Percent            0x0000b0    0x2  Data  Gb  FuelLevel.o [1]
+Fuel_Read_1ST           0x0000de    0x1  Data  Gb  FuelLevel.o [1]
+Fuellevel_FaultState    0x0000e1    0x1  Data  Gb  interpol.o [1]
+GPIO_Init               0x008616   0xe7  Code  Gb  stm8s_gpio.o [1]
+GPIO_WriteHigh          0x008d6f    0xd  Code  Gb  stm8s_gpio.o [1]
+GPIO_WriteLow           0x008de9    0x8  Code  Gb  stm8s_gpio.o [1]
+HT1621B_Init            0x00897f   0x58  Code  Gb  HT1621.o [1]
+HT1621B_SendBit         0x008b2f   0x36  Code  Gb  HT1621.o [1]
+HT1621B_SendCmd         0x008c2a   0x25  Code  Gb  HT1621.o [1]
+HT1621B_SendDataBit     0x008b65   0x36  Code  Gb  HT1621.o [1]
+HT1621B_WriteData       0x008b9b   0x35  Code  Gb  HT1621.o [1]
 INTVEC$$Base            0x008000          --   Gb  - Linker created -
 INTVEC$$Limit           0x008080          --   Gb  - Linker created -
-IndexFilter             0x000096    0x1  Data  Gb  FuelLevel.o [1]
-Interpol_Calculate      0x0088d1   0x45  Code  Gb  interpol.o [1]
-Interpol_FindPoint      0x0086d1   0xa6  Code  Gb  interpol.o [1]
+IndexFilter             0x0000e0    0x1  Data  Gb  FuelLevel.o [1]
+Interpol_Calculate      0x008a2c   0x45  Code  Gb  interpol.o [1]
+Interpol_FindPoint      0x0087b8   0xb6  Code  Gb  interpol.o [1]
 Interpol_Percent_OutputValue
-                        0x000076    0x2  Data  Gb  interpol.o [1]
-Level_Range             0x000078    0x2  Data  Gb  interpol.o [1]
-Port_Init               0x008b42   0x1a  Code  Gb  HT1621.o [1]
+                        0x0000b4    0x2  Data  Gb  interpol.o [1]
+LCD_Display_Addr        0x0000e4    0x1  Data  Gb  main.o [1]
+LCD_Display_Data        0x0000e5    0x1  Data  Gb  main.o [1]
+LCD_Display_Percent     0x0000e6    0x1  Data  Gb  main.o [1]
+LCD_Display_Percent_Add
+                        0x0000e7    0x1  Data  Gb  main.o [1]
+LCD_Display_Percent_Sub
+                        0x0000e8    0x1  Data  Gb  main.o [1]
+Level_Range             0x0000b6    0x2  Data  Gb  interpol.o [1]
+Percent_data_Addr       0x000010   0x15  Data  Gb  main.o [1]
+Percent_data_Data       0x000025   0x15  Data  Gb  main.o [1]
+Percent_data_Data_Seg0  0x000056    0xa  Data  Gb  main.o [1]
+Percent_data_Data_Seg1  0x000060    0xa  Data  Gb  main.o [1]
+Port_Init               0x008ccf   0x18  Code  Gb  HT1621.o [1]
 Region$$Table$$Base     0x008080          --   Gb  - Linker created -
 Region$$Table$$Limit    0x008095          --   Gb  - Linker created -
-SystemClock_Init        0x008c73    0x5  Code  Gb  sysclock.o [1]
-Temp_ratio              0x000086    0x2  Data  Gb  interpol.o [1]
-Temp_ratio1             0x000088    0x2  Data  Gb  interpol.o [1]
-Temp_ratio2             0x00008a    0x2  Data  Gb  interpol.o [1]
-Temp_ratio3             0x00008c    0x2  Data  Gb  interpol.o [1]
-__DebugBreak            0x008352    0x1  Code  Gb  __dbg_break.o [3]
-__exit                  0x0082f4   0x1a  Code  Gb  __dbg_xxexit.o [3]
-__iar_copy_init2        0x008229   0x42  Code  Gb  init.o [4]
-__iar_data_init2        0x0082d6   0x1e  Code  Gb  init.o [4]
-__iar_program_start     0x00830e         Code  Gb  cstartup.o [4]
+SystemClock_Init        0x008e0c    0x5  Code  Gb  sysclock.o [1]
+Temp_ratio              0x0000c4    0x2  Data  Gb  interpol.o [1]
+Temp_ratio1             0x0000c6    0x2  Data  Gb  interpol.o [1]
+Temp_ratio2             0x0000c8    0x2  Data  Gb  interpol.o [1]
+Temp_ratio3             0x0000ca    0x2  Data  Gb  interpol.o [1]
+__DebugBreak            0x008390    0x1  Code  Gb  __dbg_break.o [3]
+__exit                  0x008332   0x1a  Code  Gb  __dbg_xxexit.o [3]
+__iar_copy_init2        0x008267   0x42  Code  Gb  init.o [4]
+__iar_data_init2        0x008314   0x1e  Code  Gb  init.o [4]
+__iar_program_start     0x00834c         Code  Gb  cstartup.o [4]
 __iar_unhandled_exception
-                        0x00834f         Code  Gb  unhandled_exception.o [4]
-__iar_zero_init2        0x0082ac   0x2a  Code  Gb  init.o [4]
+                        0x00838d         Code  Gb  unhandled_exception.o [4]
+__iar_zero_init2        0x0082ea   0x2a  Code  Gb  init.o [4]
 __intvec                0x008000         Data  Gb  interrupt.o [4]
-__low_level_init        0x00834c    0x3  Code  Gb  low_level_init.o [4]
-_exit                   0x00833e         Code  Gb  cexit.o [4]
-assert_failed           0x008c78    0x2  Code  Gb  main.o [1]
-delayNMS                0x008bb4   0x14  Code  Gb  HT1621.o [1]
-delayNop                0x008be3    0xd  Code  Gb  HT1621.o [1]
-exit                    0x008348    0x4  Code  Gb  exit.o [4]
-i                       0x000095    0x1  Data  Gb  FuelLevel.o [1]
-i_index                 0x000098    0x1  Data  Gb  interpol.o [1]
-interpol_x1             0x00007c    0x2  Data  Gb  interpol.o [1]
-interpol_x2             0x00007e    0x2  Data  Gb  interpol.o [1]
-interpol_y1             0x000080    0x2  Data  Gb  interpol.o [1]
-interpol_y2             0x000082    0x2  Data  Gb  interpol.o [1]
-main                    0x008888   0x49  Code  Gb  main.o [1]
-u16_adc1_value          0x00008e    0x2  Data  Gb  main.o [1]
-u16_adc1_value_old      0x000090    0x2  Data  Gb  main.o [1]
-y                       0x000084    0x2  Data  Gb  interpol.o [1]
+__low_level_init        0x00838a    0x3  Code  Gb  low_level_init.o [4]
+_exit                   0x00837c         Code  Gb  cexit.o [4]
+assert_failed           0x008e11    0x2  Code  Gb  main.o [1]
+delayNMS                0x008d26   0x14  Code  Gb  HT1621.o [1]
+delayNop                0x008d62    0xd  Code  Gb  HT1621.o [1]
+exit                    0x008386    0x4  Code  Gb  exit.o [4]
+filter                  0x008c74   0x21  Code  Gb  main.o [1]
+i                       0x0000df    0x1  Data  Gb  FuelLevel.o [1]
+i_index                 0x0000e2    0x1  Data  Gb  interpol.o [1]
+interpol_x1             0x0000ba    0x2  Data  Gb  interpol.o [1]
+interpol_x2             0x0000bc    0x2  Data  Gb  interpol.o [1]
+interpol_y1             0x0000be    0x2  Data  Gb  interpol.o [1]
+interpol_y2             0x0000c0    0x2  Data  Gb  interpol.o [1]
+main                    0x008391  0x152  Code  Gb  main.o [1]
+u16_adc1_value          0x0000cc    0x2  Data  Gb  main.o [1]
+u16_adc1_value_old      0x0000ce    0x2  Data  Gb  main.o [1]
+y                       0x0000c2    0x2  Data  Gb  interpol.o [1]
 
 
 [1] = D:\SmartGit_Repository\STM8_HT1621_IAR_Git\Project\Debug\Obj
@@ -424,9 +465,9 @@ y                       0x000084    0x2  Data  Gb  interpol.o [1]
 [3] = dbgstm8mld.a
 [4] = dlstm8mln.a
 
-  2 820 bytes of readonly  code memory
-    374 bytes of readonly  data memory
-    410 bytes of readwrite data memory
+  3 167 bytes of readonly  code memory
+    436 bytes of readonly  data memory
+    489 bytes of readwrite data memory
 
 Errors: none
 Warnings: none

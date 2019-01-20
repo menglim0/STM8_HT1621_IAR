@@ -47,15 +47,29 @@ int Interpol_FindPoint(int x)
 	
 	
 	
-	if(x>800)
+	if(x>744)
 	{
-		Interpol_Percent_OutputValue =0;
-		Fuellevel_FaultState = ShortHigh;
+          if(x>800)
+          {
+	Fuellevel_FaultState = ShortHigh;
+          }
+          else
+        {
+          Fuellevel_FaultState = NoFault;
+        }
+        Interpol_Percent_OutputValue =0;
 	}
-	else if(x<300)
+	else if(x<399)
 	{
-	Interpol_Percent_OutputValue = 100;
+	  if(x<300)
+          {
 	Fuellevel_FaultState = ShortLow;
+          }
+        else
+        {
+          Fuellevel_FaultState = NoFault;
+        }
+        Interpol_Percent_OutputValue = 100;
 	}
 	else
 	{
@@ -69,7 +83,7 @@ int Interpol_FindPoint(int x)
 				Interpol_Percent_OutputValue=FuelLevel_ControlPoint_Percent[i_index];
 				return Interpol_Percent_OutputValue;
 			}
-			else if(x<=FuelLevel_ControlPoint_Filter_Raw[i_index]&&x>FuelLevel_ControlPoint_Filter_Raw[i_index+1])
+                      	else if(x<=FuelLevel_ControlPoint_Filter_Raw[i_index]&&x>FuelLevel_ControlPoint_Filter_Raw[i_index+1])
 			{
 				interpol_x1 = FuelLevel_ControlPoint_Filter_Raw[i_index];
 				interpol_x2 = FuelLevel_ControlPoint_Filter_Raw[i_index+1];

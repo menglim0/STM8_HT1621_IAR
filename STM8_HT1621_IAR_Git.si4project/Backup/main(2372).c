@@ -23,7 +23,7 @@
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 u16 u16_adc1_value; 
-u16 u16_adc1_value_old,DisplayFuelLevel_Unfilter,DisplayFuelLevel,DisplayFuelLevel_Percent,DisplayFuelLevel_Percent_old; 
+u16 u16_adc1_value_old,DisplayFuelLevel,DisplayFuelLevel_Percent,DisplayFuelLevel_Percent_old; 
 
 u16 DisplayFuelLevel_Hund,DisplayFuelLevel_Dec,DisplayFuelLevel_Unit;
 /* display data addre and data*/
@@ -40,22 +40,6 @@ unsigned char Percent_data_Data_Seg0[10]={0x0F,0x00,0x0B,0x09,0x04,0x0D,0x0F,0x0
 unsigned char Percent_data_Data_Seg1[10]={0x0A,0x0A,0x0C,0x0E,0x0E,0x06,0x06,0x0A,0x0E,0x0E};
 
 
-#define DisplayFuelLevel_Data_Seg4 4
-#define DisplayFuelLevel_Data_Seg5 5
-#define DisplayFuelLevel_Data_Seg6 6
-#define DisplayFuelLevel_Data_Seg7 7
-#define DisplayFuelLevel_Data_Seg8 8
-
-unsigned char DisplayFuelLevel_Data_Seg_Percent[5]={4,5,6,7,8};
-unsigned char DisplayFuelLevel_Data_Data_Percent[4]={1,3,7,15};
-unsigned char DisplayFuelLevel_Data_Data_Percent_N[5]={15,7,3,1};
-
-
-unsigned char Percent_Data_Index,Percent_Seg_Index;
-
-
-
-
 uint8_t ADC_Update_index;
 u8 LCD_Display_Addr,LCD_Display_Data,LCD_Display_Data_Bit,LCD_Display_Data_Index;
 
@@ -66,16 +50,13 @@ unsigned char Percent_data_Addr[21]={9,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,8};
 
 unsigned char Percent_data_Data[21]={13,8,12,14,15,1,3,7,15,8,12,14,15, 1,3,7,15,8,12,14,15};
 
-#define Fliter_Length 100
-uint16_t filter(uint8_t Length,uint16_t ADC_Result);
-
 
 
 void Delay(unsigned int time)
 {
 	volatile unsigned int i;
 	while(time--){
-		i=100;
+		i=30;
 		while(i--); 
 	}
 }
@@ -84,7 +65,7 @@ int main(void)
 {
 
   /* 系统时钟初始化 */
-   SystemClock_Init();
+  SystemClock_Init();
   Port_Init();
   ADC_Init();
   //Uart2_Init();
@@ -96,7 +77,7 @@ int main(void)
     /*放置你的代码*/
        
   
-        Delay(1000);
+        Delay(10);
 		u16_adc1_value_old=u16_adc1_value;
         u16_adc1_value = ADC1_GetConversionValue();
         
@@ -118,14 +99,7 @@ int main(void)
           ADC_Update_index=0;
         }
     
-        DisplayFuelLevel_Unfilter = FuelLevel_Percent_Calc(u16_adc1_value,ADC_Update_index);
-
-		
-		DisplayFuelLevel=filter(Fliter_Length,DisplayFuelLevel_Unfilter);
-
-		
-
-		/* dispaly the percent fule by Data*/
+        DisplayFuelLevel = FuelLevel_Percent_Calc(u16_adc1_value,ADC_Update_index);
         
 		DisplayFuelLevel_Percent = DisplayFuelLevel/5+1;
                 DisplayFuelLevel_Hund=DisplayFuelLevel/100;
@@ -134,9 +108,9 @@ int main(void)
 		
 
 		 HT1621B_WriteData(DisplayFuelLevel_Data_Seg0,Percent_data_Data_Seg0[DisplayFuelLevel_Dec]);
-		 HT1621B_WriteData(DisplayFuelLevel_Data_Seg1,Percent_data_Data_Seg1[DisplayFuelLevel_Dec]|DisplayFuelLevel_Hund);
-		 HT1621B_WriteData(DisplayFuelLevel_Data_Seg2,Percent_data_Data_Seg0[DisplayFuelLevel_Unit]);
-                 HT1621B_WriteData(DisplayFuelLevel_Data_Seg3,Percent_data_Data_Seg1[DisplayFuelLevel_Unit]|0x01);
+		  HT1621B_WriteData(DisplayFuelLevel_Data_Seg1,Percent_data_Data_Seg1[DisplayFuelLevel_Dec]|DisplayFuelLevel_Hund);
+		   HT1621B_WriteData(DisplayFuelLevel_Data_Seg2,Percent_data_Data_Seg0[DisplayFuelLevel_Unit]);
+		    HT1621B_WriteData(DisplayFuelLevel_Data_Seg3,Percent_data_Data_Seg1[DisplayFuelLevel_Unit]|0x01);
 /*
 for(LCD_Display_Data_Index=0;LCD_Display_Data_Index<10;LCD_Display_Data_Index++)
 {
@@ -170,13 +144,6 @@ for(LCD_Display_Data_Index=0;LCD_Display_Data_Index<10;LCD_Display_Data_Index++)
 	}
        else if(DisplayFuelLevel_Percent_old!=DisplayFuelLevel_Percent)
         	{
-				/*Percent_Seg_Index=(DisplayFuelLevel_Percent-1)/5;
-				Percent_Data_Index=(DisplayFuelLevel_Percent-1)/4;
-
-				HT1621B_WriteData(DisplayFuelLevel_Data_Seg_Percent[Percent_Seg_Index],DisplayFuelLevel_Data_Data_Percent[Percent_Data_Index]);
-				*/
-
-			
 				for(LCD_Display_Percent=0;LCD_Display_Percent<21;LCD_Display_Percent++)
 				{
 				  
@@ -191,12 +158,11 @@ for(LCD_Display_Data_Index=0;LCD_Display_Data_Index<10;LCD_Display_Data_Index++)
 					{
                                           
 				            HT1621B_WriteData(Percent_data_Addr[LCD_Display_Percent_Add],Percent_data_Data[LCD_Display_Percent_Add]);
-				            Delay(1);
+				            Delay(10);
 					}
 				        
 				      
 				}
-				
         	}
 
   DisplayFuelLevel_Percent_old=DisplayFuelLevel_Percent;
@@ -206,21 +172,6 @@ for(LCD_Display_Data_Index=0;LCD_Display_Data_Index<10;LCD_Display_Data_Index++)
   }
   
 }
-
-  
-  uint16_t filter(uint8_t Length,uint16_t ADC_Result)
-  {
-  unsigned int sum = 0;
-  unsigned char i;
-  
-  for (i=0;i<Length;i++)
-  {
-  sum += ADC_Result;
-    }
-  return(uint16_t)(sum/Length);
-  }
-
-  
 
 #ifdef USE_FULL_ASSERT
 
