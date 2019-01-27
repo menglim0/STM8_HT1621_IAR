@@ -34,8 +34,8 @@ u16 DisplayFuelLevel_Hund,DisplayFuelLevel_Dec,DisplayFuelLevel_Unit;
 #define DisplayFuelLevel_Data_Seg3 3
 
 
-unsigned char Percent_data_Data_ErrorLow[4]={0x0F,0x04,0x07,0x01};
-unsigned char Percent_data_Data_ErrorHigh[4]={0x0F,0x04,0x06,0x0F};
+unsigned char Percent_data_Data_ErrorHigh[4]={0x0F,0x04,0x07,0x01};
+unsigned char Percent_data_Data_ErrorLow[4]={0x0F,0x04,0x06,0x0F};
 
 
 unsigned char Percent_data_Data_Seg0[10]={0x0F,0x00,0x0B,0x09,0x04,0x0D,0x0F,0x08,0x0F,0x0D};
@@ -128,7 +128,7 @@ int main(void)
     /*·ÅÖÃÄãµÄ´úÂë*/
        
   
-        Delay(5000);
+        Delay(10000);
 		u16_adc1_value_old=u16_adc1_value;
         u16_adc1_value = ADC1_GetConversionValue();
 
@@ -161,15 +161,13 @@ int main(void)
 
 	if(u16_adc1_value_filter>1000)
 	{
-          Fuel_Sensor_ShortHigh = TRUE;	
-          Fuel_Sensor_ShortLow = FALSE;
+		Fuel_Sensor_ShortHigh = TRUE;	
+		Fuel_Sensor_ShortLow = FALSE;
 	}
 	else if(u16_adc1_value_filter<100)
 	{
-
-          Fuel_Sensor_ShortLow = TRUE;
-          Fuel_Sensor_ShortHigh = FALSE;
-
+	Fuel_Sensor_ShortLow = TRUE;
+	Fuel_Sensor_ShortHigh = FALSE;
 	}
         else
 	{
@@ -187,7 +185,7 @@ int main(void)
 	}
 	else if(Fuel_Sensor_ShortHigh)
 	{
-			HT1621B_WriteData(DisplayFuelLevel_Data_Seg0,Percent_data_Data_ErrorHigh[0]);
+					 HT1621B_WriteData(DisplayFuelLevel_Data_Seg0,Percent_data_Data_ErrorHigh[0]);
 			 HT1621B_WriteData(DisplayFuelLevel_Data_Seg1,Percent_data_Data_ErrorHigh[1]);
 			 HT1621B_WriteData(DisplayFuelLevel_Data_Seg2,Percent_data_Data_ErrorHigh[2]);
 	                 HT1621B_WriteData(DisplayFuelLevel_Data_Seg3,Percent_data_Data_ErrorHigh[3]);
@@ -228,7 +226,6 @@ for(LCD_Display_Data_Index=0;LCD_Display_Data_Index<10;LCD_Display_Data_Index++)
         {
           
            HT1621B_WriteData(0x09,0x09);
-            HT1621B_WriteData(Percent_data_Addr_New[0],Percent_Set_Data[0][0]);
             Delay(10);
 	}
         else if(DisplayFuelLevel<=5)
@@ -237,16 +234,21 @@ for(LCD_Display_Data_Index=0;LCD_Display_Data_Index<10;LCD_Display_Data_Index++)
            HT1621B_WriteData(Percent_data_Addr_New[0],Percent_Set_Data[0][0]);
         }
        else if(DisplayFuelLevel_Percent_old!=DisplayFuelLevel_Percent)
-        {                  
-	    HT1621B_WriteData(0x09,0x0D);
-	       for(Percent_Data_Index_AutoTest=0;Percent_Data_Index_AutoTest<5;Percent_Data_Index_AutoTest++)
-	       {
-	               HT1621B_WriteData(Percent_data_Addr_New[Percent_Data_Index_AutoTest],Percent_Set_Data[DisplayFuelLevel_Percent -1][Percent_Data_Index_AutoTest]);
-	               //   HT1621B_WriteData(Percent_data_Addr[LCD_Display_Percent_Sub],0);              
+        {
+                  
+                       
+                           for(Percent_Data_Index_AutoTest=0;Percent_Data_Index_AutoTest<5;Percent_Data_Index_AutoTest++)
+                           {
+                                   HT1621B_WriteData(Percent_data_Addr_New[Percent_Data_Index_AutoTest],Percent_Set_Data[DisplayFuelLevel_Percent -1][Percent_Data_Index_AutoTest]);
+                                   //   HT1621B_WriteData(Percent_data_Addr[LCD_Display_Percent_Sub],0);              
 
-	       }                    
+                           }
+                    
+                                
+                                
+                                
                               
-         }
+                        }
                      
                         
                         
@@ -269,7 +271,6 @@ void DisplayFuelLevel_Percent_Func(uint8_t dat)
      
       HT1621B_WriteData(Percent_data_Addr[1],Percent_Set_Data_Display[0]);
 }
-
   uint16_t filter(uint8_t Length,uint16_t ADC_Result)
   {
   unsigned int sum = 0;

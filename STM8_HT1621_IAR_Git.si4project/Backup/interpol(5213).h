@@ -5,13 +5,6 @@
 //#include "stm32f10x.h"
 //#include "hardware.h"
 
-enum FaultState
-{ NoFault,ShortLow,ShortHigh,Otherfault };
-
-
-
-//extern FaultState Fuellevel_FaultState;
-
 int Interpol_Calculate(int x1,int y1,int x2,int y2, int x);
 
 int Interpol_FindPoint(int x);

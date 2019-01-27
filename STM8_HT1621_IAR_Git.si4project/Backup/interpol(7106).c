@@ -25,7 +25,8 @@ int interpol_x1,interpol_x2,interpol_y1,interpol_y2;
 	int Temp_ratio2;
 	int Temp_ratio3;
 
-
+enum FaultState
+{ NoFault,ShortLow,ShortHigh,Otherfault };
 
 enum FaultState Fuellevel_FaultState;
 char i_index;
